@@ -15,7 +15,7 @@ async function askQuestion(question: string) {
   const context = results.documents[0].join("\n\n");
 
   const response = await axios.post(`${config.OLLAMA_API_URL}/api/generate`, {
-    model: config.LLM_MODEL,
+    model: config.OLLAMA_MODEL,
     prompt: `Answer the following confidently based only on context:\n\n${context}\n\nQuestion: ${question}`,
     stream: false,
   });

@@ -8,5 +8,5 @@ export const config = {
   CHROMADB_COLLECTION: process.env.CHROMADB_COLLECTION || "handbook",
   EMBEDDINGS_MODEL: process.env.EMBEDDINGS_MODEL || "nomic-embed-text:v1.5",
   OLLAMA_API_URL: process.env.OLLAMA_API_URL || "http://localhost:11434/api",
-  LLM_MODEL: process.env.LLM_MODEL || "llama3.2:latest",
+  OLLAMA_MODEL: process.env.OLLAMA_MODEL || "llama3.2:latest",
 };
