@@ -1,6 +1,6 @@
-import { embedText } from "../embed/nomicOllamaClient";
-import { getCollection } from "../db/chromaDB";
-import { config } from "../config/config";
+import { embedText } from "../../embed/nomicOllamaClient";
+import { getCollection } from "../../db/chromaDB";
+import { config } from "../../config/config";
 import axios from "axios";
 
 async function askQuestion(question: string) {
