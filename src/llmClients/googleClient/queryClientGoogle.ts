@@ -26,7 +26,7 @@ export async function generateGoogleAIResponse(
     const context = results.documents[0].join("\n\n");
 
     // Construct a prompt with the context and the original question
-    const enhancedPrompt = `Answer the following question confidently with detailed explenation based only on this context:\n\n${context}\n\nQuestion: ${prompt}`;
+    const enhancedPrompt = `Answer the following question confidently with detailed explanation using only the information provided in this context. Avoid phrases like "based on the context" or "I'm not sure". If information isn't available, say so directly.\n\n${context}\n\nQuestion: ${prompt}`;
 
     const API_URL = `${config.GOOGLEAI_API_URL}${config.GOOGLEAI_MODEL_NAME}:generateContent?key=${config.GOOGLEAI_API_KEY}`;
     const requestData = {
@@ -71,13 +71,13 @@ export async function generateGoogleAIResponse(
   }
 }
 
-(async () => {
-  try {
-    const response = await generateGoogleAIResponse(
-      "are there any existing simmilar projects to this research?"
-    );
-    console.log("Google AI Response:", response);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-})();
+// (async () => {
+//   try {
+//     const response = await generateGoogleAIResponse(
+//       "Who is the girl with harry?"
+//     );
+//     console.log("Google AI Response:", response);
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// })();
