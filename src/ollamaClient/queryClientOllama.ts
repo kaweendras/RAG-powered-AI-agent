@@ -1,4 +1,3 @@
-// src/query.ts
 import { embedText } from "../embed/nomicOllamaClient";
 import { getCollection } from "../db/chromaDB";
 import { config } from "../config/config";
@@ -25,10 +24,10 @@ async function askQuestion(question: string) {
 }
 
 // Self-invoke async function to handle the async call
-(async () => {
-  try {
-    await askQuestion("What is the purpose of this research?");
-  } catch (error) {
-    console.error("Error asking question:", error);
-  }
-})();
+// (async () => {
+//   try {
+//     await askQuestion("What is the purpose of this research?");
+//   } catch (error) {
+//     console.error("Error asking question:", error);
+//   }
+// })();

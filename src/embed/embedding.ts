@@ -1,4 +1,3 @@
-// src/indexPdf.ts
 import { chunkPdf } from "../utils/chuckUtil";
 import { embedText } from "./nomicOllamaClient";
 import { getCollection } from "../db/chromaDB";
