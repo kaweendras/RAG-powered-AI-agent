@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev": "tsx src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -10,10 +11,14 @@
   "license": "ISC",
   "description": "This is a simple RAG powered AI agent that can answer questions based on the provided context.",
   "dependencies": {
+    "@types/cors": "^2.8.18",
     "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.2",
     "axios": "^1.9.0",
     "chromadb": "^2.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "fs": "^0.0.1-security",
     "pdf-parse": "^1.1.1"
   },
