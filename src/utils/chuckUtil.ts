@@ -6,7 +6,7 @@ export async function chunkPdf(
   chunkSize = 500,
   overlap = 100
 ): Promise<string[]> {
-  const dataBuffer = fs.readFileSync(`pdf/${filePath}`);
+  const dataBuffer = fs.readFileSync(`${filePath}`);
   const data = await pdf(dataBuffer);
   const text = data.text;
 
