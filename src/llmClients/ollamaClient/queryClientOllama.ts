@@ -18,6 +18,7 @@ async function askQuestion(question: string) {
     model: config.OLLAMA_MODEL,
     prompt: `Answer the following confidently based only on context:\n\n${context}\n\nQuestion: ${question}`,
     stream: false,
+    temperature: config.TEMPERATURE || 0.2,
   });
 
   console.log(`Answer:\n${response.data.response}`);
