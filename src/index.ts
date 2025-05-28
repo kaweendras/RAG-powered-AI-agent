@@ -20,5 +20,7 @@ app.get("/health", (req, res) => {
 app.use("/api/query", queryRoutes);
 // Start the server
 app.listen(PORT, () => {
+  //check vectorDB type
+  console.log(`Using VectorDB: ${config.VECTORDB_TYPE}`);
   console.log(`RAG API server running on port ${PORT}`);
 });
