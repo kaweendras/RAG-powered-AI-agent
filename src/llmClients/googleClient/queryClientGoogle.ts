@@ -25,11 +25,16 @@ export async function generateGoogleAIResponse(
     // Join the retrieved context documents
     const context = results.documents[0].join("\n\n");
 
+    const generationConfig = {
+      temperature: config.TEMPERATURE || 0.2,
+    };
+
     // Construct a prompt with the context and the original question
     const enhancedPrompt = `Answer the following question confidently with detailed explanation using only the information provided in this context. Avoid phrases like "based on the context" or "I'm not sure". If information isn't available, say so directly.\n\n${context}\n\nQuestion: ${prompt}`;
 
     const API_URL = `${config.GOOGLEAI_API_URL}${config.GOOGLEAI_MODEL_NAME}:generateContent?key=${config.GOOGLEAI_API_KEY}`;
     const requestData = {
+      generationConfig,
       contents: [
         {
           parts: [

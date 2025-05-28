@@ -4,6 +4,8 @@ dotenv.config();
 
 export const config = {
   PORT: process.env.PORT || 4000,
+  PINECONE_API_KEY: process.env.PINECONE_API_KEY || "YOUR_PINECONE_API_KEY",
+  PINECONE_INDEX_NAME: process.env.PINECONE_INDEX_NAME || "handbook-index",
   CHROMADB_URL: process.env.CHROMADB_URL || "http://localhost:8000",
   CHROMADB_COLLECTION: process.env.CHROMADB_COLLECTION || "handbook",
   EMBEDDINGS_MODEL: process.env.EMBEDDINGS_MODEL || "nomic-embed-text:v1.5",
@@ -14,4 +16,6 @@ export const config = {
   GOOGLEAI_API_URL:
     process.env.GOOGLEAI_API_URL ||
     "https://generativelanguage.googleapis.com/v1beta/models/",
+  TEMPERATURE: parseFloat(process.env.TEMPERATURE || "0.2"),
+  SEED: parseInt(process.env.SEED || "42", 10),
 };
