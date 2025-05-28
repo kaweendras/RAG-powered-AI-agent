@@ -8,20 +8,24 @@ const pc = new Pinecone({
 // Create a dense index with integrated embedding
 const createIndex = async () => {
   const indexName = config.PINECONE_INDEX_NAME;
-  await pc.createIndex({
-    name: indexName,
-    dimension: 768,
-    metric: "cosine",
-    spec: {
-      serverless: {
-        cloud: "aws",
-        region: "us-east-1",
+  try {
+    await pc.createIndex({
+      name: indexName,
+      dimension: 768, // Match the dimension of your nomic embeddings
+      metric: "cosine",
+      spec: {
+        serverless: {
+          cloud: "aws",
+          region: "us-east-1",
+        },
       },
-    },
-  });
-
-  console.log(`Created index: ${indexName}`);
-  return indexName;
+    });
+    console.log(`Created index: ${indexName}`);
+    return indexName;
+  } catch (error) {
+    console.error(`Error creating index: ${error}`);
+    throw error;
+  }
 };
 
 // Function to get or create the Pinecone index
@@ -55,11 +59,23 @@ export async function upsertToPinecone(
     const index = await getPineconeIndex(indexName);
 
     // Create records in the format expected by Pinecone
-    const records = documents.map((doc) => ({
-      id: doc.id,
-      text: doc.text,
-      metadata: doc.metadata || {},
-    }));
+    const records = documents.map((doc) => {
+      // If embedding is provided in metadata, use it as values
+      const embedding = doc.metadata?.embedding;
+      const values = embedding ? embedding : [];
+
+      // Remove embedding from metadata to avoid duplication
+      const { embedding: _, ...metadataWithoutEmbedding } = doc.metadata || {};
+
+      return {
+        id: doc.id,
+        values: values,
+        metadata: {
+          text: doc.text,
+          ...metadataWithoutEmbedding,
+        },
+      };
+    });
 
     return await index.upsert(records);
   } catch (error) {
@@ -67,3 +83,13 @@ export async function upsertToPinecone(
     throw error;
   }
 }
+
+//call getPineconeIndex to ensure the index is created
+// (async () => {
+//   try {
+//     await getPineconeIndex();
+//     console.log("Pinecone index is ready.");
+//   } catch (error) {
+//     console.error("Error initializing Pinecone index:", error);
+//   }
+// })();
