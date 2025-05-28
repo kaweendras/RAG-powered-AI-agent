@@ -14,6 +14,28 @@ A Retrieval-Augmented Generation (RAG) system that enhances AI responses by retr
   - Ollama local LLM integration
 - Context-aware responses using RAG methodology
 
+## Use Cases
+
+This RAG-powered AI agent can be used in various scenarios, including:
+
+### Document Analysis and Question Answering
+
+- Extract insights from research papers, books, or technical documentation
+- Answer specific questions about PDF content with precise context
+- Generate summaries of lengthy documents with accurate references
+
+### Knowledge Base Enhancement
+
+- Transform corporate handbooks into interactive Q&A systems
+- Create intelligent assistants for technical support using product manuals
+- Build educational tools that explain complex topics from textbooks
+
+### Information Retrieval
+
+- Search through large document collections more effectively than keyword search
+- Find relevant information across multiple documents simultaneously
+- Retrieve contextual information based on semantic meaning rather than exact text matches
+
 ## Prerequisites
 
 - Node.js (v16+)
@@ -29,7 +51,7 @@ A Retrieval-Augmented Generation (RAG) system that enhances AI responses by retr
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/RAG-powered-AI-agent.git
+git clone https://github.com/kaweendras/RAG-powered-AI-agent.git
 cd RAG-powered-AI-agent
 ```
 
