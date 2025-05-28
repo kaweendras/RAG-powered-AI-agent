@@ -6,7 +6,9 @@ A Retrieval-Augmented Generation (RAG) system that enhances AI responses by retr
 
 - PDF document processing and chunking
 - Vector embeddings using Nomic models via Ollama
-- Vector database storage using ChromaDB
+- Vector database storage options:
+  - ChromaDB (local or remote)
+  - Pinecone (cloud-based vector DB)
 - AI query capabilities with:
   - Google AI (Gemini) integration
   - Ollama local LLM integration
@@ -17,7 +19,9 @@ A Retrieval-Augmented Generation (RAG) system that enhances AI responses by retr
 - Node.js (v16+)
 - npm or yarn
 - Ollama installed locally (for embeddings and local LLM)
-- ChromaDB instance (local or remote)
+- Vector database (choose one):
+  - ChromaDB instance (local or remote)
+  - Pinecone account (for cloud vector storage)
 - Google AI API key (for Gemini integration)
 
 ## Installation
@@ -42,22 +46,39 @@ cp .env.sample .env
 ```
 
 4. Edit the `.env` file to include your specific configuration:
-   - Add your Google API key
+   - Choose your vector database (CHROMADB or PINECONE)
+   - Add your Google API key for Gemini integration
+   - Configure Pinecone details if using Pinecone
    - Set your preferred ChromaDB collection name
-   - Adjust any other settings as needed
+   - Adjust model settings and other parameters as needed
 
-## ChromaDB Setup
+## Vector Database Setup
 
-This project uses ChromaDB as its vector database for storing document embeddings to enable efficient similarity search.
+This project supports two vector database options for storing document embeddings:
 
-For ChromaDB installation and configuration, please refer to the official documentation: [ChromaDB Getting Started](https://docs.trychroma.com/docs/overview/getting-started?lang=typescript)
+### ChromaDB (Default)
 
-**Note about dimensions:** This project uses embeddings with 768 dimensions. The ChromaDB configuration in `src/db/chromaDB.ts` is set up to automatically handle the collection creation with the correct dimension settings.
+For local or self-hosted vector storage, the project uses ChromaDB.
+
+- For ChromaDB installation and configuration, please refer to the official documentation: [ChromaDB Getting Started](https://docs.trychroma.com/docs/overview/getting-started?lang=typescript)
+- Default URL: http://localhost:8000 (configurable in .env)
+
+### Pinecone
+
+For cloud-based vector storage with higher scalability, you can use Pinecone.
+
+- Sign up at [Pinecone](https://www.pinecone.io/) and create an index
+- Set your API key and index name in the .env file
+- Set `VECTORDB_TYPE=PINECONE` in your .env file
+
+**Note about dimensions:** This project uses embeddings with 768 dimensions. The vector database configurations are set up to automatically handle the collection/index creation with the correct dimension settings.
 
 ## Project Structure
 
 - **src/config**: Configuration settings
-- **src/db**: ChromaDB connection and management
+- **src/db**: Vector database connections
+  - **chromaDB.ts**: ChromaDB connection and management
+  - **pineDB.ts**: Pinecone connection and management
 - **src/embed**: Document embedding functionality
 - **src/llmClients**: Integration with AI models
   - **googleClient**: Google Gemini API integration
@@ -66,7 +87,9 @@ For ChromaDB installation and configuration, please refer to the official docume
 
 ## Known Issues and Troubleshooting
 
-### ChromaDB Dimension Mismatch
+### Vector Database Issues
+
+#### ChromaDB Dimension Mismatch
 
 If you receive an error like:
 
@@ -101,6 +124,16 @@ If you can't connect to Ollama:
    ollama pull nomic-embed-text:v1.5
    ollama pull llama2
    ```
+
+## Embedding Model Information
+
+This project uses the Nomic embedding model (`nomic-embed-text:v1.5`) which produces **dense vectors** with 768 dimensions. These dense vectors are ideal for semantic search capabilities:
+
+- **Dense vectors**: Fixed-length arrays with mostly non-zero values, optimized for semantic similarity searches
+- The vector databases (ChromaDB and Pinecone) are configured to work with these dense embeddings
+- Each PDF chunk is converted to a dense embedding vector that represents its semantic meaning
+
+For advanced applications, hybrid search approaches combining dense vectors with sparse vectors (like BM25) could be implemented as a future enhancement.
 
 ## Contributing
 
