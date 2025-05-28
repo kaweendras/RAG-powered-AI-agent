@@ -5,10 +5,6 @@ import { GoogleAIResponse } from "../../types/googleAITypes";
 import { getPineconeIndex } from "../../db/pineDB";
 import axios from "axios";
 
-/**
- * Generate a response from Google AI with RAG capabilities
- * Queries the ChromaDB collection for relevant context before asking Google AI
- */
 export async function generateGoogleAIResponse(
   prompt: string
 ): Promise<string> {

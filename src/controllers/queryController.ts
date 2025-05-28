@@ -1,6 +1,5 @@
 // filepath: /home/kaweendra/work/per/RAG-powered-AI-agent/src/controllers/queryController.ts
 import { generateGoogleAIResponse } from "../llmClients/googleClient/queryClientGoogle";
-
 /**
  * Handle queries to the Google AI model
  * @param req Express request object
