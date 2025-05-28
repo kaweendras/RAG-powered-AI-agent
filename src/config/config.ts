@@ -4,6 +4,7 @@ dotenv.config();
 
 export const config = {
   PORT: process.env.PORT || 4000,
+  VECTORDB_TYPE: process.env.VECTORDB_TYPE || "CHROMA",
   PINECONE_API_KEY: process.env.PINECONE_API_KEY || "YOUR_PINECONE_API_KEY",
   PINECONE_INDEX_NAME: process.env.PINECONE_INDEX_NAME || "handbook-index",
   CHROMADB_URL: process.env.CHROMADB_URL || "http://localhost:8000",
