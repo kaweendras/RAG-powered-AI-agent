@@ -65,11 +65,11 @@ export async function GenerateOllamaResponse(prompt: string): Promise<string> {
   }
 }
 
-(async () => {
-  try {
-    const response = await GenerateOllamaResponse("What is this story about?");
-    console.log("Ollama Response:", response);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-})();
+// (async () => {
+//   try {
+//     const response = await GenerateOllamaResponse("What is this story about?");
+//     console.log("Ollama Response:", response);
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// })();
