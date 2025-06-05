@@ -53,7 +53,9 @@ export async function generateGoogleAIResponse(
     const context = results.documents[0].join("\n\n");
 
     const generationConfig = {
-      temperature: config.TEMPERATURE || 0.2,
+      temperature: config.TEMPERATURE || 0.1,
+      topK: 10,
+      topP: 0.95,
     };
 
     // Construct a prompt with the context and the original question
