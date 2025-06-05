@@ -13,6 +13,8 @@ A Retrieval-Augmented Generation (RAG) system that enhances AI responses by retr
   - Google AI (Gemini) integration
   - Ollama local LLM integration
 - Context-aware responses using RAG methodology
+- Unified API endpoint with model selection parameter
+- Efficient error handling for model and API errors
 
 ## Use Cases
 
@@ -73,6 +75,67 @@ cp .env.sample .env
    - Configure Pinecone details if using Pinecone
    - Set your preferred ChromaDB collection name
    - Adjust model settings and other parameters as needed
+
+## API Usage
+
+The RAG-powered AI agent provides flexible API endpoints for querying the system with different AI models:
+
+### Endpoints
+
+1. **Model-specific endpoint with Google AI**:
+
+   ```
+   POST /api/query/google
+   ```
+
+   This endpoint specifically uses the Google AI (Gemini) model for processing queries.
+
+2. **Generic endpoint with model selection**:
+   ```
+   POST /api/query/ask?mode=[model]
+   ```
+   This endpoint allows you to specify which model to use through the `mode` query parameter:
+   - `mode=google` - Uses Google AI (Gemini)
+   - `mode=ollama` - Uses local Ollama LLM (default if not specified)
+
+### Request Format
+
+All query endpoints accept a JSON body with the following format:
+
+```json
+{
+  "query": "Your question about the document content here"
+}
+```
+
+### Example Usage
+
+```bash
+# Query using Google AI
+curl -X POST http://localhost:4000/api/query/google \
+  -H "Content-Type: application/json" \
+  -d '{"query":"What is this document about?"}'
+
+# Query using the generic endpoint with Ollama (default)
+curl -X POST http://localhost:4000/api/query/ask \
+  -H "Content-Type: application/json" \
+  -d '{"query":"What is this document about?"}'
+
+# Query using the generic endpoint with Google AI
+curl -X POST http://localhost:4000/api/query/ask?mode=google \
+  -H "Content-Type: application/json" \
+  -d '{"query":"What is this document about?"}'
+```
+
+### Response Format
+
+The API returns a JSON response with the following structure:
+
+```json
+{
+  "response": "Detailed answer based on the document content..."
+}
+```
 
 ## Vector Database Setup
 
@@ -141,11 +204,26 @@ If you can't connect to Ollama:
    ```bash
    ollama list
    ```
-3. Download required models if needed:
-   ```bash
-   ollama pull nomic-embed-text:v1.5
-   ollama pull llama2
-   ```
+3. Download required models for Ollama:
+
+```bash
+# Download the embedding model used by this project
+ollama pull nomic-embed-text:v1.5
+
+# Download a language model (llama2 used in this project by default)
+# You can also use other models like mistral, llama3, etc. Larger models may require more resources
+ollama pull llama2
+```
+
+### API Endpoint Issues
+
+If you encounter problems with the API endpoints:
+
+1. Make sure the server is running on the correct port (default 4000)
+2. Check that your request includes the correct content type header: `Content-Type: application/json`
+3. Ensure the JSON body contains a `query` field
+4. For model selection, use the query parameter: `?mode=google` or `?mode=ollama`
+5. If experiencing 500 errors with Ollama, try reducing the query size or switching to a lighter model in your `.env` file
 
 ## Embedding Model Information
 
