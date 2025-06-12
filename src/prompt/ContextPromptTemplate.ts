@@ -1,11 +1,11 @@
 import { PromptTemplate } from "@langchain/core/prompts";
 
+// Import JSON with type assertion
+import promptJsonData from "./contextPrompt.json";
+const promptData = promptJsonData as { template: string };
+
 export const contextPromptTemplate = PromptTemplate.fromTemplate(
-  `Answer the following question confidently with detailed explanation using only the information provided in this context. Avoid phrases like "based on the context" or "I'm not sure". If information isn't available, say so directly.
-
-{context}
-
-Question: {query}`
+  promptData.template
 );
 
 export const generateEnhancedPrompt = async (
