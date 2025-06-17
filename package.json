@@ -12,6 +12,7 @@
   "description": "This is a simple RAG powered AI agent that can answer questions based on the provided context.",
   "dependencies": {
     "@pinecone-database/pinecone": "^6.1.0",
+    "@supabase/supabase-js": "^2.50.0",
     "@types/cors": "^2.8.18",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.2",
