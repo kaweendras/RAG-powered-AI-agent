@@ -19,4 +19,9 @@ export const config = {
     "https://generativelanguage.googleapis.com/v1beta/models/",
   TEMPERATURE: parseFloat(process.env.TEMPERATURE || "0.2"),
   SEED: parseInt(process.env.SEED || "42", 10),
+  SUPERBASE_URL:
+    process.env.SUPERBASE_URL || "https://nzitwbocimucfytvdyxd.supabase.co",
+  SUPERBASE_KEY: process.env.SUPERBASE_KEY || "SUPERBASE_KEY",
+  SUPERBASE_INDEX_NAME: process.env.SUPERBASE_INDEX_NAME || "hp2",
+  SUPERBASE_TABLE_NAME: process.env.SUPERBASE_TABLE_NAME || "hp2", // Default to 'documents' table
 };
